@@ -10,227 +10,124 @@
     <title>Document</title>
 </head>
 
-<body>
-    <nav class="flex py-2 px-4 md:px-8 bg-white border-b border-slate-300 min-h-17 relative z-20"
-        aria-label="Main navigation">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center gap-4 w-full">
+<body class="min-h-screen flex flex-col font-sans text-slate-800 antialiased bg-white">
+
+    <header class="bg-white border-b border-slate-100 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between relative"
+            aria-label="Main navigation">
+
             <a href="/"
-                class="min-w-9 inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
-                <span class="sr-only">Your Company</span>
-                <img src="https://readymadeui.com/logo-alt.svg" alt="readymadeui logo" class="h-9 w-auto" />
+                class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md">
+                <img src="{{ asset('img/CftLogo.png') }}" alt="CFT Logo" class="h-10 w-auto object-contain" />
             </a>
 
-            <div id="collapseMenu" tabindex="-1"
-                class="hidden lg:block max-lg:bg-white max-lg:border-l max-lg:border-slate-300 max-lg:w-1/2 max-lg:fixed max-lg:top-0 max-lg:right-0 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto max-sm:w-full z-50 outline-none">
+            <div id="collapseMenu"
+                class="hidden lg:flex max-lg:absolute max-lg:top-full max-lg:left-0 max-lg:w-full max-lg:bg-white max-lg:border-b max-lg:border-slate-100 max-lg:p-6 max-lg:shadow-lg flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-8 text-sm font-medium text-slate-600">
+                <a href="/" class="hover:text-blue-700 transition-colors">Home</a>
+                <a href="/about" class="hover:text-blue-600 transition-colors">About</a>
+                <a href="/blog" class="hover:text-blue-600 transition-colors">Blog</a>
+                <a href="/contact" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                    aria-current="page">Contact</a>
+            </div>
 
-                <div
-                    class="py-2 px-4 flex justify-between items-center border-b border-slate-300 sticky top-0 bg-white lg:hidden max-lg:min-h-17">
-                    <a href="/"
-                        class="inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
-                        <span class="sr-only">Your Company</span>
-                        <img src="https://readymadeui.com/logo-alt.svg" alt="readymadeui logo" class="h-9 w-auto" />
-                    </a>
-                    <button type="button" aria-controls="collapseMenu" id="toggleClose"
-                        class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
-                        <span class="sr-only">Close main menu</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 fill-slate-900" aria-hidden="true"
-                            viewBox="0 0 329.269 329">
-                            <path
-                                d="M194.8 164.77 323.013 36.555c8.343-8.34 8.343-21.825 0-30.164-8.34-8.34-21.825-8.34-30.164 0L164.633 134.605 36.422 6.391c-8.344-8.34-21.824-8.34-30.164 0-8.344 8.34-8.344 21.824 0 30.164l128.21 128.215L6.259 292.984c-8.344 8.34-8.344 21.825 0 30.164a21.27 21.27 0 0 0 15.082 6.25c5.46 0 10.922-2.09 15.082-6.25l128.21-128.214 128.216 128.214a21.27 21.27 0 0 0 15.082 6.25c5.46 0 10.922-2.09 15.082-6.25 8.343-8.34 8.343-21.824 0-30.164zm0 0"
-                                data-original="#000000" />
-                        </svg>
-                    </button>
+            <button type="button" aria-controls="collapseMenu" aria-expanded="false" id="toggleOpen"
+                class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main class="grow flex items-center justify-center py-16 px-6 bg-slate-50/50">
+        <div class="w-full max-w-xl mx-auto">
+
+            <h1 class="text-4xl md:text-5xl font-light text-slate-900 text-center mb-10 tracking-tight">
+                Send a Message
+            </h1>
+
+            <div class="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-slate-100">
+                <form action="contact" method="POST" class="space-y-6">
+                    @csrf
+
+                    <div>
+                        <label for="nama" class="block text-sm font-medium text-slate-600 mb-2">
+                            Nama Lengkap
+                        </label>
+                        <input type="text" id="nama" name="nama" pattern=".*\S.*"
+                            placeholder="Masukkan nama lengkap Anda" required
+                            class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder:text-slate-400">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-600 mb-2">
+                            Alamat Email
+                        </label>
+                        <input type="email" id="email" name="email" pattern=".*\S.*"
+                            placeholder="nama@email.com" required
+                            class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder:text-slate-400">
+                    </div>
+
+                    <div>
+                        <label for="pesan" class="block text-sm font-medium text-slate-600 mb-2">
+                            Pesan
+                        </label>
+                        <textarea id="pesan" name="pesan" onblur="this.value = this.value.trim()" rows="5"
+                            placeholder="Tuliskan pesan Anda di sini..." required
+                            class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder:text-slate-400 resize-y"></textarea>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit"
+                            class="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm shadow-sm hover:shadow transition-all duration-150 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Kirim Pesan
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-slate-300 border-t border-slate-100 py-12 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-center max-w-2xl mx-auto">
+                <div>
+                    <h3 class="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-4">Navigation</h3>
+                    <ul class="space-y-2.5 text-sm font-medium text-slate-500">
+                        <li><a href="/" class="hover:text-blue-600 transition-colors">Home</a></li>
+                        <li><a href="/about" class="hover:text-blue-600 transition-colors">About</a></li>
+                        <li><a href="/blog" class="hover:text-blue-600 transition-colors">Blog</a></li>
+                        <li><a href="/contact" class="hover:text-blue-600 transition-colors">Contact</a></li>
+                    </ul>
                 </div>
 
-                <ul class="flex flex-col gap-8 font-semibold text-sm text-slate-900 lg:flex-row max-lg:p-6 lg:ml-12">
-                    <li>
-                        <a href="/"
-                            class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Home</a>
-                    </li>
-                    <li>
-                        <a href="contact"
-                            class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-                            aria-current="contact">Contact</a>
-                    </li>
-                    <li>
-                        <a href="blog"
-                            class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Blog</a>
-                    </li>
-                    <li>
-                        <a href="about"
-                            class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">About</a>
-                    </li>
-                </ul>
+                <div>
+                    <h3 class="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-4">Quick Links</h3>
+                    <ul class="space-y-2.5 text-sm font-medium text-slate-500">
+                        <li><a href="https://github.com/cfarreltanmel" target="_blank" rel="noopener noreferrer"
+                                class="hover:text-blue-600 transition-colors">GitHub</a></li>
+                        <li><a href="https://www.instagram.com/chrisfata_" target="_blank" rel="noopener noreferrer"
+                                class="hover:text-blue-600 transition-colors">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/nba" target="_blank" rel="noopener noreferrer"
+                                class="hover:text-blue-600 transition-colors">YouTube</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="flex items-center gap-4 ml-auto">
-                <a href="#"
-                    class="text-slate-900 text-sm font-semibold hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Log
-                    in</a>
-                <a href="#"
-                    class="py-2 px-3.5 text-sm rounded-md font-semibold cursor-pointer text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Sign
-                    up</a>
-
-                <button type="button" aria-controls="collapseMenu" aria-expanded="false" aria-haspopup="true"
-                    id="toggleOpen"
-                    class="cursor-pointer lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="size-7 fill-slate-900" aria-hidden="true" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
+            <div class="mt-12 pt-8 border-t border-black">
+                <p class="text-sm text-slate-500 text-center">
+                    © {{ date('Y') }} Christian Farrel Tanmel. All rights reserved.
+                </p>
             </div>
         </div>
-    </nav>
-    <h1>Contact</h1>
+    </footer>
 
-    <li>
-        <h3>Email: <a href="mailto:chrisfata07@gmail.com">chrisfata07@gmail.com</a></h3>
-        <h3>Instagram: <a href="https://www.instagram.com/chrisfata_/">chrisfata_</a></h3>
-        <h3>Whatsapp: +123456789</h3>
-    </li>
+    <script src="js/script.js"></script>
 </body>
-
-<footer class="bg-white pt-16 pb-8 px-4 md:px-8">
-    <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-6 sm:gap-x-8">
-            <div>
-                <h3 class="text-slate-900 font-semibold text-sm mb-6">Quick Links</h3>
-                <ul class="space-y-4 text-slate-600 text-sm font-normal">
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Our
-                            Story</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Newsroom</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Careers</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Blog</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Press
-                            Kit</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="text-slate-900 font-semibold text-sm mb-6">Services</h3>
-                <ul class="space-y-4 text-slate-600 text-sm font-normal">
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Web
-                            Development</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Testing
-                            Automation</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">AWS
-                            Development Services</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Mobile
-                            App Development</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">UI/UX
-                            Design</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="text-slate-900 font-semibold text-sm mb-6">Platforms</h3>
-                <ul class="space-y-4 text-slate-600 text-sm font-normal">
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Hubspot</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Marketo
-                            Integration Services</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Marketing
-                            Glossary</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">UIPath</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Salesforce</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Zapier
-                            Integration</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="text-slate-900 font-semibold text-sm mb-6">Company</h3>
-                <ul class="space-y-4 text-slate-600 text-sm font-normal">
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Accessibility</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">About</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Contact</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Learn
-                            more</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Privacy
-                            Policy</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Terms
-                            of Service</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <hr class="border-slate-300 my-8" />
-
-        <div class="text-left">
-            <p class="text-slate-600 text-sm">
-                © Christian Farrel Tanmel. All rights reserved.
-            </p>
-        </div>
-    </div>
-</footer>
 
 </html>
