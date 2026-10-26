@@ -49,10 +49,10 @@
                 Blog
             </h1>
 
-            <p class="text-lg md:text-xl text-slate-600 font-normal max-w-2xl mb-8 leading-relaxed">
+            <article class="text-lg md:text-xl text-slate-600 font-normal max-w-2xl mb-8 leading-relaxed">
                 Selamat datang di blog saya! Di sini, saya berbagi berbagai artikel yang mungkin berguna untuk
                 pengembangan website/aplikasi menggunakan laravel.
-            </p>
+            </article>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 <div class="bg-white rounded-lg shadow-md p-6 border border-slate-100">
